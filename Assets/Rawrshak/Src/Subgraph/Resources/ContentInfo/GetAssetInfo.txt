@@ -1,0 +1,18 @@
+query GetAssetInfo {{
+    asset ( id: "{0}-{1}" ) {{
+        id
+        tokenId
+        name
+        type
+        subtype
+        imageUri
+        currentSupply
+        maxSupply
+        latestPublicUriVersion
+        latestHiddenUriVersion
+        latestPublicUri
+        tags {{
+            id
+        }}
+    }}
+}}

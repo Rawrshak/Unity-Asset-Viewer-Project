@@ -1,0 +1,9 @@
+query GetAccountInfo {{
+    account ( id: "{0}" ) {{
+        id
+        address
+        mintCount
+        burnCount
+        uniqueAssetCount
+    }}
+}}

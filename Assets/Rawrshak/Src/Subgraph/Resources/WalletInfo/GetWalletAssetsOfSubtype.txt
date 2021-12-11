@@ -1,0 +1,15 @@
+query GetWalletAssetsOfSubtype {{
+    account ( id: "{0}" ) {{
+        assetBalances ( first: {2}, where: {{ subtype: "{1}", id_gt: "{3}", amount_gt: 0 }} ) {{
+            id
+            amount
+            asset {{
+                id
+                tokenId
+                parentContract {{
+                    id
+                }}
+            }}
+        }}
+    }}
+}}

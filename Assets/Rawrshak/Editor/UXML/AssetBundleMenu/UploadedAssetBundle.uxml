@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<engine:UXML
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:engine="UnityEngine.UIElements"
+    xmlns:editor="UnityEditor.UIElements"
+    xsi:noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd"
+>
+    <engine:Box name="asset-bundle-box" style="flex-direction: Row; font-size: 12px;" >
+        <engine:Label name="name" style="width: 30%;"/>
+        <engine:Label name="hash" style="width:45%;"/>
+        <engine:Label name="date-uploaded" style="width: 25%; -unity-text-align: middle-right;"/>
+    </engine:Box> 
+    
+</engine:UXML>

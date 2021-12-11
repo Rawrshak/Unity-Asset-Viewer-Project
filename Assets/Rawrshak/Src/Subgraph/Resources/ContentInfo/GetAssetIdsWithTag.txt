@@ -1,0 +1,12 @@
+query GetAssetsWithTag {{
+    tags ( where: {{id: "{2}"}} ) {{
+        id
+        assets ( first: {0}, where: {{ id_gt: "{1}" }} ) {{
+            id
+            tokenId
+            parentContract {{
+                id
+            }}
+        }}
+    }}
+}}

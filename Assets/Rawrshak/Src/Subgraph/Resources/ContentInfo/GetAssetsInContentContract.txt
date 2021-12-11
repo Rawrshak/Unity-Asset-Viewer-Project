@@ -1,0 +1,21 @@
+query GetAssetsInContentContract {{
+    content ( id: "{0}" ) {{
+        id
+        assets ( first: {1}, where: {{ id_gt: "{2}" }} ) {{
+            id
+            tokenId
+            name
+            type
+            subtype
+            imageUri
+            currentSupply
+            maxSupply
+            latestPublicUriVersion
+            latestHiddenUriVersion
+            latestPublicUri
+            tags {{
+                id
+            }}
+        }}
+    }}
+}}
