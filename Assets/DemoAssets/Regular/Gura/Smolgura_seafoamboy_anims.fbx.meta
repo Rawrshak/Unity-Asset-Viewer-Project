@@ -1,0 +1,215 @@
+fileFormatVersion: 2
+guid: 1bfa0bd445642954db1c8699e51fda5b
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: foot.L
+    100002: foot.R
+    100004: forearm.L
+    100006: forearm.R
+    100008: gurarig
+    100010: hair.L
+    100012: hair.R
+    100014: hairB
+    100016: hairB2
+    100018: hairB3
+    100020: hairF
+    100022: hand.L
+    100024: hand.R
+    100026: hat
+    100028: pelvis.L
+    100030: pelvis.R
+    100032: shin.L
+    100034: shin.R
+    100036: shoulder.L
+    100038: shoulder.R
+    100040: skirt.L
+    100042: skirt.R
+    100044: skirtback.L
+    100046: skirtback.R
+    100048: skirtside.L
+    100050: skirtside.R
+    100052: //RootNode
+    100054: smolguramesh
+    100056: spine
+    100058: spine.001
+    100060: spine.002
+    100062: spine.003
+    100064: spine.004
+    100066: spine.005
+    100068: spine.006
+    100070: tail1
+    100072: tail2
+    100074: tail3
+    100076: tailfin1
+    100078: tailfin2
+    100080: tailroot
+    100082: thigh.L
+    100084: thigh.R
+    100086: toe.L
+    100088: toe.R
+    100090: twintail.L
+    100092: twintail.R
+    100094: upper_arm.L
+    100096: upper_arm.R
+    400000: foot.L
+    400002: foot.R
+    400004: forearm.L
+    400006: forearm.R
+    400008: gurarig
+    400010: hair.L
+    400012: hair.R
+    400014: hairB
+    400016: hairB2
+    400018: hairB3
+    400020: hairF
+    400022: hand.L
+    400024: hand.R
+    400026: hat
+    400028: pelvis.L
+    400030: pelvis.R
+    400032: shin.L
+    400034: shin.R
+    400036: shoulder.L
+    400038: shoulder.R
+    400040: skirt.L
+    400042: skirt.R
+    400044: skirtback.L
+    400046: skirtback.R
+    400048: skirtside.L
+    400050: skirtside.R
+    400052: //RootNode
+    400054: smolguramesh
+    400056: spine
+    400058: spine.001
+    400060: spine.002
+    400062: spine.003
+    400064: spine.004
+    400066: spine.005
+    400068: spine.006
+    400070: tail1
+    400072: tail2
+    400074: tail3
+    400076: tailfin1
+    400078: tailfin2
+    400080: tailroot
+    400082: thigh.L
+    400084: thigh.R
+    400086: toe.L
+    400088: toe.R
+    400090: twintail.L
+    400092: twintail.R
+    400094: upper_arm.L
+    400096: upper_arm.R
+    4300000: smolguramesh
+    7400000: smolguraAnimationsRESOURCE
+    7400002: ParadeWalk
+    7400004: idle
+    9500000: //RootNode
+    13700000: smolguramesh
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SmolGura
+    second: {fileID: 2100000, guid: 9537519293f69d345b2a2b4aa2e31da5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SmolguraEye
+    second: {fileID: 2100000, guid: 9b326925201fe30478fc37979342ab43, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SmolguraHead
+    second: {fileID: 2100000, guid: 7951d0293cf66314a9ac66cf2506a1fb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SmolguraOutline
+    second: {fileID: 2100000, guid: 754387616438830489f141ab84a49442, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

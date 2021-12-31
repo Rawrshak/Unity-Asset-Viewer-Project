@@ -12,19 +12,10 @@ namespace Rawrshak
     // public abstract class QueryBase : SingletonScriptableObject<QueryBase>
     public abstract class QueryBase
     {
-        // public Subgraph subgraph = null;
-        // protected string query;
-
         protected static string LoadQuery(string queryLocation) {
             TextAsset metadataTextAsset=(TextAsset)Resources.Load(queryLocation);
             return metadataTextAsset.text;
         }
-
-        // protected static void CheckSubgraph() {
-        //     if (subgraph == null) {
-        //         subgraph = Subgraph.Instance;
-        //     }
-        // }
 
         protected static async Task<string> PostAsync(string uri, string queryWithArgs) {
             // Post query
