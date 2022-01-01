@@ -10,7 +10,7 @@ public class ImageAssetManager : MonoBehaviour
     public GameObject m_imageFrame;
     public Dropdown m_imageSelectorDropdown;
     
-    private List<KeyValuePair<RawrshakAsset, int>> m_assets;
+    private List<KeyValuePair<Asset, int>> m_assets;
     private Material m_material;
     
     // Start is called before the first frame update
@@ -28,7 +28,7 @@ public class ImageAssetManager : MonoBehaviour
             return;
         }
         
-        m_assets = new List<KeyValuePair<RawrshakAsset, int>>();
+        m_assets = new List<KeyValuePair<Asset, int>>();
         
         ClearAssets();
         m_imageSelectorDropdown.onValueChanged.AddListener(async delegate {
@@ -61,7 +61,7 @@ public class ImageAssetManager : MonoBehaviour
         m_imageSelectorDropdown.value = 0;
     }
 
-    public async Task LoadImageAssets(List<KeyValuePair<RawrshakAsset, int>> imageAssets)
+    public async Task LoadImageAssets(List<KeyValuePair<Asset, int>> imageAssets)
     {
         m_assets = imageAssets;
         foreach (var pair in imageAssets)
@@ -86,7 +86,7 @@ public class ImageAssetManager : MonoBehaviour
     {
         if (m_imageSelectorDropdown.value < m_assets.Count)
         {
-            RawrshakAsset asset = m_assets[m_imageSelectorDropdown.value].Key;
+            Asset asset = m_assets[m_imageSelectorDropdown.value].Key;
             Debug.Log("Image Name: " + asset.assetName);
             
             // Load the Image Texture 2D

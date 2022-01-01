@@ -5,7 +5,7 @@ using UnityEngine;
 public class GetAssetIdsWithTagScript : MonoBehaviour
 {
     // Input
-    public string tag;
+    public string assetTag;
     public int amountToQuery;
     public string lastItemId;
 
@@ -15,6 +15,6 @@ public class GetAssetIdsWithTagScript : MonoBehaviour
     // Start is called before the first frame update
     async void Start()
     {
-        data = await Rawrshak.GetAssetIdsWithTag.Fetch(tag, amountToQuery, lastItemId);
+        data = await Rawrshak.GetAssetIdsWithTag.Fetch(assetTag, amountToQuery, lastItemId);
     }
 }

@@ -11,7 +11,7 @@ public class TextAssetManager : MonoBehaviour
     public Dropdown m_textSelectorDropdown;
 
     private Text m_text;
-    private List<KeyValuePair<RawrshakAsset, int>> m_assets;
+    private List<KeyValuePair<Asset, int>> m_assets;
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +30,7 @@ public class TextAssetManager : MonoBehaviour
             return;
         }
 
-        m_assets = new List<KeyValuePair<RawrshakAsset, int>>();
+        m_assets = new List<KeyValuePair<Asset, int>>();
         m_text = m_textAsset.GetComponent<Text>();
         m_text.text = "Gamer Title:";
 
@@ -46,7 +46,7 @@ public class TextAssetManager : MonoBehaviour
         
     }
 
-    public async Task LoadTextAssets(List<KeyValuePair<RawrshakAsset, int>> textAssets)
+    public async Task LoadTextAssets(List<KeyValuePair<Asset, int>> textAssets)
     {
         m_assets = textAssets;
         foreach (var pair in m_assets)
@@ -81,7 +81,7 @@ public class TextAssetManager : MonoBehaviour
     {
         if (m_textSelectorDropdown.value < m_assets.Count)
         {
-            RawrshakAsset asset = m_assets[m_textSelectorDropdown.value].Key;
+            Asset asset = m_assets[m_textSelectorDropdown.value].Key;
             m_text.text = "Gamer Title: " + (asset.assetComponent as TitleAsset).GetTitle();
         }
     }

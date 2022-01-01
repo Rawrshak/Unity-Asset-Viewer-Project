@@ -10,7 +10,7 @@ public class AudioAssetManager : MonoBehaviour
     public AudioSource m_source;
     public Dropdown m_audioSelectorDropdown;
 
-    private List<KeyValuePair<RawrshakAsset, int>> m_assets;
+    private List<KeyValuePair<Asset, int>> m_assets;
 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +29,7 @@ public class AudioAssetManager : MonoBehaviour
             return;
         }
         
-        m_assets = new List<KeyValuePair<RawrshakAsset, int>>();
+        m_assets = new List<KeyValuePair<Asset, int>>();
         
         ClearAssets();
         m_audioSelectorDropdown.onValueChanged.AddListener(async delegate {
@@ -53,7 +53,7 @@ public class AudioAssetManager : MonoBehaviour
         m_audioSelectorDropdown.value = 0;
     }
 
-    public async Task LoadAudioAssets(List<KeyValuePair<RawrshakAsset, int>> audioAssets)
+    public async Task LoadAudioAssets(List<KeyValuePair<Asset, int>> audioAssets)
     {
         m_assets = audioAssets;
         foreach (var pair in audioAssets)
@@ -78,7 +78,7 @@ public class AudioAssetManager : MonoBehaviour
     {
         if (m_audioSelectorDropdown.value < m_assets.Count)
         {
-            RawrshakAsset asset = m_assets[m_audioSelectorDropdown.value].Key;
+            Asset asset = m_assets[m_audioSelectorDropdown.value].Key;
             Debug.Log("Audio Name: " + asset.assetName);
 
             // Load the Audio Clip

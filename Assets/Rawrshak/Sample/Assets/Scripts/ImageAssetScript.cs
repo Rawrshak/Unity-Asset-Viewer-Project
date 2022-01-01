@@ -13,7 +13,7 @@ public class ImageAssetScript : MonoBehaviour
     public string tokenId;
     public int amount;
 
-    public string name;
+    public string assetName;
 
     private Rawrshak.Asset imageAsset;
     private Material m_material;
@@ -77,7 +77,7 @@ public class ImageAssetScript : MonoBehaviour
 
     public async Task LoadImageAssets()
     {
-        name = imageAsset.assetName;
+        assetName = imageAsset.assetName;
         
         // Load the Image Texture 2D
         Rawrshak.ImageAssetBase imageAssetComponent = imageAsset.assetComponent as Rawrshak.ImageAssetBase;

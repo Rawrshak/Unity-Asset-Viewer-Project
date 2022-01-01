@@ -10,7 +10,7 @@ public class Static3dAssetManager : MonoBehaviour
     public GameObject m_defaultObject;
     public Dropdown m_staticObjectSelectorDropdown;
 
-    private List<KeyValuePair<RawrshakAsset, int>> m_assets;
+    private List<KeyValuePair<Asset, int>> m_assets;
 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +29,7 @@ public class Static3dAssetManager : MonoBehaviour
             return;
         }
         
-        m_assets = new List<KeyValuePair<RawrshakAsset, int>>();
+        m_assets = new List<KeyValuePair<Asset, int>>();
         
         ClearAssets();
         m_staticObjectSelectorDropdown.onValueChanged.AddListener(async delegate {
@@ -53,7 +53,7 @@ public class Static3dAssetManager : MonoBehaviour
         m_staticObjectSelectorDropdown.value = 0;
     }
 
-    public async Task LoadStaticObjectAssets(List<KeyValuePair<RawrshakAsset, int>> staticObjectAssets)
+    public async Task LoadStaticObjectAssets(List<KeyValuePair<Asset, int>> staticObjectAssets)
     {
         m_assets = staticObjectAssets;
         foreach (var pair in staticObjectAssets)
@@ -78,7 +78,7 @@ public class Static3dAssetManager : MonoBehaviour
     {
         if (m_staticObjectSelectorDropdown.value < m_assets.Count)
         {
-            RawrshakAsset asset = m_assets[m_staticObjectSelectorDropdown.value].Key;
+            Asset asset = m_assets[m_staticObjectSelectorDropdown.value].Key;
             Debug.Log("Static Object Name: " + asset.assetName);
             
             // // Load the Static 3D Object

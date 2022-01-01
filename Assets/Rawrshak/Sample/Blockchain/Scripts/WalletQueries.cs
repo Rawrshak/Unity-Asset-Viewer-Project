@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Rawrshak;
 using System.Threading.Tasks;
-using Rawrshak;
 
 public class WalletQueries : MonoBehaviour
 {

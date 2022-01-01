@@ -13,7 +13,7 @@ public class AudioAssetScript : MonoBehaviour
     public string tokenId;
     public int amount;
 
-    public string name;
+    public string assetName;
 
     private Rawrshak.Asset audioAsset;
     public AudioSource m_source;
@@ -67,7 +67,7 @@ public class AudioAssetScript : MonoBehaviour
 
     public async Task LoadAudioAssets()
     {
-        name = audioAsset.assetName;
+        assetName = audioAsset.assetName;
         
         // Load the Audio file
         Rawrshak.AudioAssetBase assetComponent = audioAsset.assetComponent as Rawrshak.AudioAssetBase;

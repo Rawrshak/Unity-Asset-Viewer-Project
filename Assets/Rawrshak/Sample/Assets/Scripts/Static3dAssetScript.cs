@@ -14,7 +14,7 @@ public class Static3dAssetScript : MonoBehaviour
     public string tokenId;
     public int amount;
 
-    public string name;
+    public string assetName;
 
     private Rawrshak.Asset staticAsset;
     private Rawrshak.GetWalletAssetsOfType.ReturnData data;
@@ -68,7 +68,7 @@ public class Static3dAssetScript : MonoBehaviour
 
     public async Task LoadStatic3dAssets()
     {
-        name = staticAsset.assetName;
+        assetName = staticAsset.assetName;
         
         // Load the Static 3D Object
         Rawrshak.Static3dObjectAssetBase assetComponent = staticAsset.assetComponent as Rawrshak.Static3dObjectAssetBase;
