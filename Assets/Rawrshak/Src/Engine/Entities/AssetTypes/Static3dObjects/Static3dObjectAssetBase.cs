@@ -50,7 +50,6 @@ namespace Rawrshak
         protected Platform currentPlatform;
         protected Shape currentShape;
         protected RenderPipeline currentRenderPipeline;
-        protected AssetBundle currentAssetBundle;
         protected GameObject currentPrefab;
 
         public override void Init(PublicAssetMetadataBase baseMetadata)
@@ -135,19 +134,14 @@ namespace Rawrshak
             // Todo: Verify if the 3d object exists within the bounds of the default asset for the 
             //       necessary shape.
 
-            // If a new AssetBundle was loaded is different from the current bundle
-            if (currentAssetBundle && assetBundle != currentAssetBundle)
-            {
-                currentAssetBundle.Unload(false);
-            }
-
             // Set new current loaded information
             currentFidelity = fidelity;
             currentPlatform = platform;
             currentRenderPipeline = renderPipeline;
             currentShape = ParseShape(prefabProperty.shape);
-            currentAssetBundle = assetBundle;
             currentPrefab = prefabGameObj;
+
+            assetBundle.Unload(false);
 
             return currentPrefab;
         }

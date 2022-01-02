@@ -46,6 +46,14 @@ namespace Rawrshak
             uniqueAssetCount = BigInteger.Parse(responseData.data.account.uniqueAssetCount);
         }
 
+        public void Reset()
+        {
+            walletAddress = String.Empty;
+            mintCount = 0;
+            burnCount = 0;
+            uniqueAssetCount = 0;
+        }
+
         public async Task<List<KeyValuePair<Asset, int>>> GetAllAssetsInWallet(int amount, string lastId)
         {
             List<KeyValuePair<Asset, int>> assets = new List<KeyValuePair<Asset, int>>();

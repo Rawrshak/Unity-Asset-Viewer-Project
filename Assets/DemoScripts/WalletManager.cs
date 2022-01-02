@@ -23,6 +23,7 @@ public class WalletManager : MonoBehaviour
     public ImageAssetManager m_imageAssetManager;
 
     public Button m_refreshButton;
+    public Button m_loadNewWalletButton;
 
     // Start is called before the first frame update
     void Start()
@@ -42,11 +43,12 @@ public class WalletManager : MonoBehaviour
         // Get the instance of the TextAssetManager
 
         m_refreshButton.onClick.AddListener(async () => await RefreshWallet());
+        m_loadNewWalletButton.onClick.AddListener(async () => await ClearWallet());
     }
 
     void OnDisable()
     {
-        // m_walletConnect.CLearSession();
+        m_walletConnect.CLearSession();
     }
 
     private async Task WalletConnectedEventHandler()
@@ -114,6 +116,31 @@ public class WalletManager : MonoBehaviour
         else
         {
             Debug.LogError("No Wallet Loaded");
+        }
+    }
+
+    public async Task ClearWallet()
+    {
+        // Todo: Add Clear Wallet and Reload
+        if (m_walletConnect.Connected)
+        {
+            // Clearing WalletConnect
+            m_walletConnect.CLearSession();
+
+            Debug.Log("Clearing Wallet Assets.");
+            m_loadWalletUI.SetActive(true);
+            m_loggedInUI.SetActive(false);
+            
+            m_walletAddressText.text = $"Wallet Address:"; 
+
+            m_rawrshakWallet.Reset();
+
+            m_textAssetManager.ClearAssets();
+            m_imageAssetManager.ClearAssets();
+            m_audioAssetManager.ClearAssets();
+            m_static3dAssetManager.ClearAssets();
+            
+            await m_walletConnect.Connect();
         }
     }
 }

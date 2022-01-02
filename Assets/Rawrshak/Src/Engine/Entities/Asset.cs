@@ -209,6 +209,7 @@ namespace Rawrshak
                 return;
             }
 
+            Debug.Log("Downloading Metadata: " + uri);
             string metadataJson = await Downloader.DownloadMetadata(uri);
 
             if (String.IsNullOrEmpty(metadataJson)) {
