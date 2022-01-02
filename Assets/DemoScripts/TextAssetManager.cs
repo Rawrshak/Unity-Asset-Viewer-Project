@@ -72,6 +72,9 @@ public class TextAssetManager : MonoBehaviour
         // Clear All Saved Assets
         m_assets.Clear();
 
+        // Clear text
+        m_text.text = "Gamer Title:";
+
         // Clear dropdown
         m_textSelectorDropdown.ClearOptions();
         m_textSelectorDropdown.value = 0;

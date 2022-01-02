@@ -8,6 +8,8 @@ using Rawrshak;
 public class Static3dAssetManager : MonoBehaviour
 {
     public GameObject m_defaultObject;
+    public GameObject m_childObject;
+    public GameObject m_placeholder;
     public Dropdown m_staticObjectSelectorDropdown;
 
     private List<KeyValuePair<Asset, int>> m_assets;
@@ -40,13 +42,17 @@ public class Static3dAssetManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        m_placeholder.transform.Rotate(0.0f, 0.05f, 0.0f, Space.Self);
     }
 
     public void ClearAssets()
     {   
         // Clear All Saved Assets
         m_assets.Clear();
+
+        // Delete child object, enable default object
+        m_defaultObject.SetActive(true);
+        Destroy(m_childObject);
 
         // Clear dropdown
         m_staticObjectSelectorDropdown.ClearOptions();
@@ -135,10 +141,10 @@ public class Static3dAssetManager : MonoBehaviour
                 Static3dObjectAssetBase.RenderPipeline.BuiltInRenderPipeline,
                 // Static3dObjectAssetBase.Fidelity.Low);
                 supportedFidelities[0]);
-            GameObject prefabInstance = Instantiate(prefab, transform.position, transform.rotation);
-            Destroy(m_defaultObject);
-            m_defaultObject = prefabInstance;
-            m_defaultObject.transform.parent = transform;
+            GameObject prefabInstance = Instantiate(prefab, m_placeholder.transform.position, m_placeholder.transform.rotation);
+            m_defaultObject.SetActive(false);
+            m_childObject = prefabInstance;
+            m_childObject.transform.parent = m_placeholder.transform;
         }
     }
 }

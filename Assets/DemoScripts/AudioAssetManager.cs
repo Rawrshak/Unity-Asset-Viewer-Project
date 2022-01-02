@@ -66,6 +66,9 @@ public class AudioAssetManager : MonoBehaviour
         // Clear All Saved Assets
         m_assets.Clear();
 
+        // Clear audio clip
+        m_source.clip = null;
+
         // Clear dropdown
         m_audioSelectorDropdown.ClearOptions();
         m_audioSelectorDropdown.value = 0;

@@ -12,6 +12,7 @@ public class ImageAssetManager : MonoBehaviour
     
     private List<KeyValuePair<Asset, int>> m_assets;
     private Material m_material;
+    private Texture m_defaultTexture;
     
     // Start is called before the first frame update
     void Start()
@@ -30,6 +31,10 @@ public class ImageAssetManager : MonoBehaviour
         
         m_assets = new List<KeyValuePair<Asset, int>>();
         
+        m_material = GetComponent<MeshRenderer>().material;
+        Debug.Log("Material Name: " + m_material.name);
+        m_defaultTexture = m_material.mainTexture;
+        
         ClearAssets();
         m_imageSelectorDropdown.onValueChanged.AddListener(async delegate {
             await ImageSelectedValueChanged();
@@ -41,8 +46,6 @@ public class ImageAssetManager : MonoBehaviour
             DisableManagerWithMessage("ImageAssetManager: Image Frame does not contain a mesh renderer. ImageAssetManager will be disabled");
             return;
         }
-        m_material = GetComponent<MeshRenderer>().material;
-        Debug.Log("Material Name: " + m_material.name);
     }
 
     // Update is called once per frame
@@ -55,6 +58,8 @@ public class ImageAssetManager : MonoBehaviour
     {   
         // Clear All Saved Assets
         m_assets.Clear();
+        
+        m_material.mainTexture = m_defaultTexture;
 
         // Clear dropdown
         m_imageSelectorDropdown.ClearOptions();

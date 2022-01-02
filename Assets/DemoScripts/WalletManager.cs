@@ -22,6 +22,8 @@ public class WalletManager : MonoBehaviour
     public TextAssetManager m_textAssetManager;
     public ImageAssetManager m_imageAssetManager;
 
+    public Button m_refreshButton;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,11 +40,13 @@ public class WalletManager : MonoBehaviour
         });
 
         // Get the instance of the TextAssetManager
-        m_textAssetManager = GameObject.FindObjectOfType<TextAssetManager>();
-        m_imageAssetManager = GameObject.FindObjectOfType<ImageAssetManager>();
-        m_audioAssetManager = GameObject.FindObjectOfType<AudioAssetManager>();
-        m_static3dAssetManager = GameObject.FindObjectOfType<Static3dAssetManager>();
-        m_rawrshakWallet = GameObject.FindObjectOfType<Wallet>();
+
+        m_refreshButton.onClick.AddListener(async () => await RefreshWallet());
+    }
+
+    void OnDisable()
+    {
+        // m_walletConnect.CLearSession();
     }
 
     private async Task WalletConnectedEventHandler()
@@ -75,5 +79,41 @@ public class WalletManager : MonoBehaviour
         List<KeyValuePair<Asset, int>> staticObjectAssets = await m_rawrshakWallet.GetAssetsOfType("static3dobject", 100, String.Empty);
         Debug.Log("Loading Static Objects Assets: " + staticObjectAssets.Count);
         await m_static3dAssetManager.LoadStaticObjectAssets(staticObjectAssets);
+    }
+
+    public async Task RefreshWallet()
+    {
+        if (m_walletConnect.Connected)
+        {
+            Debug.Log("Reloading Wallet Assets.");
+
+            // Load Text objects
+            List<KeyValuePair<Asset, int>> textAssets = await m_rawrshakWallet.GetAssetsOfType("text", 100, String.Empty);
+            Debug.Log("Loading Text Assets: " + textAssets.Count);
+            m_textAssetManager.ClearAssets();
+            await m_textAssetManager.LoadTextAssets(textAssets);
+
+            // Load Image objects
+            List<KeyValuePair<Asset, int>> imageAssets = await m_rawrshakWallet.GetAssetsOfType("image", 100, String.Empty);
+            Debug.Log("Loading Image Assets: " + imageAssets.Count);
+            m_imageAssetManager.ClearAssets();
+            await m_imageAssetManager.LoadImageAssets(imageAssets);
+
+            // Audio Image objects
+            List<KeyValuePair<Asset, int>> audioAssets = await m_rawrshakWallet.GetAssetsOfType("audio", 100, String.Empty);
+            Debug.Log("Loading Audio Assets: " + audioAssets.Count);
+            m_audioAssetManager.ClearAssets();
+            await m_audioAssetManager.LoadAudioAssets(audioAssets);
+
+            // Static 3d Object Image objects
+            List<KeyValuePair<Asset, int>> staticObjectAssets = await m_rawrshakWallet.GetAssetsOfType("static3dobject", 100, String.Empty);
+            Debug.Log("Loading Static Objects Assets: " + staticObjectAssets.Count);
+            m_static3dAssetManager.ClearAssets();
+            await m_static3dAssetManager.LoadStaticObjectAssets(staticObjectAssets);
+        }
+        else
+        {
+            Debug.LogError("No Wallet Loaded");
+        }
     }
 }
