@@ -23,6 +23,8 @@ namespace Rawrshak
             Aiff
         }
 
+        // todo: add Compression
+
         private static string Engine = "unity";
 
         protected AudioMetadataBase metadata;

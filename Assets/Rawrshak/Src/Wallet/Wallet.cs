@@ -36,7 +36,7 @@ namespace Rawrshak
 
             if (responseData.data.account.address == null)
             {
-                Debug.Log("Error: No Assets");
+                Debug.Log("Info: Unused Wallet");
                 return;
             }
 
@@ -62,7 +62,7 @@ namespace Rawrshak
 
             if (responseData.data.account.assetBalances == null)
             {
-                Debug.Log("Error: No Assets");
+                Debug.Log("Info: No Rawrshak Assets in Wallet");
                 return assets;
             }
 
@@ -86,7 +86,7 @@ namespace Rawrshak
 
             if (responseData.data.account.assetBalances == null)
             {
-                Debug.Log("Error: No Assets");
+                Debug.Log("Info: No Rawrshak Assets in Wallet");
                 return assets;
             }
 
@@ -109,7 +109,7 @@ namespace Rawrshak
 
             if (responseData.data.account.assetBalances == null)
             {
-                Debug.Log("Error: No Assets");
+                Debug.Log("Info: No Rawrshak Assets in Wallet");
                 return assets;
             }
 
@@ -133,7 +133,7 @@ namespace Rawrshak
 
             if (responseData.data.account.assetBalances == null)
             {
-                Debug.Log("Error: No Assets");
+                Debug.Log("Info: No Rawrshak Assets in Wallet");
                 return assets;
             }
 
