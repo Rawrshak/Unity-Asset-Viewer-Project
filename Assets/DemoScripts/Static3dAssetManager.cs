@@ -141,6 +141,12 @@ public class Static3dAssetManager : MonoBehaviour
                 Static3dObjectAssetBase.RenderPipeline.BuiltInRenderPipeline,
                 // Static3dObjectAssetBase.Fidelity.Low);
                 supportedFidelities[0]);
+
+            if (prefab == null) {
+                Debug.LogError("Error: Couldn't load \"" + asset.assetName + "\" prefab.");
+                return;
+            }
+            
             GameObject prefabInstance = Instantiate(prefab, m_placeholder.transform.position, m_placeholder.transform.rotation);
             m_defaultObject.SetActive(false);
             m_childObject = prefabInstance;

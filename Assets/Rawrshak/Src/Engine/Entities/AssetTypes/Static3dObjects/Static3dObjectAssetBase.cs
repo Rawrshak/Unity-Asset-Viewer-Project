@@ -128,6 +128,7 @@ namespace Rawrshak
             if (prefabGameObj == null)
             {
                 Debug.LogError("Prefab doesn't exist in AssetBundle");
+                assetBundle.Unload(true);
                 return null;
             }
 

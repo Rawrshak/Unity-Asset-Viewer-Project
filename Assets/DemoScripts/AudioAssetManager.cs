@@ -79,6 +79,7 @@ public class AudioAssetManager : MonoBehaviour
         m_assets = audioAssets;
         foreach (var pair in audioAssets)
         {
+            // Load metadata
             await pair.Key.Load();
             Debug.Log($"Asset: {pair.Key.assetName}, amount: {pair.Value}");
 
@@ -114,6 +115,10 @@ public class AudioAssetManager : MonoBehaviour
 
             // Just use the default for now
             m_source.clip = await audioAsset.LoadAndSetAudioClipFromContentType(contentTypes[0]);
+
+            if (m_source.clip == null) {
+                Debug.LogError("Error: Couldn't load \"" + asset.assetName + "\" audio clip.");
+            }
         }
     }
 }

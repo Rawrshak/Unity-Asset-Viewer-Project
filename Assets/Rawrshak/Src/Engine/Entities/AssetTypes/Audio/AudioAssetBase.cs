@@ -86,6 +86,7 @@ namespace Rawrshak
             if (audioClip == null)
             {
                 Debug.LogError("AudioClip doesn't exist in AssetBundle");
+                assetBundle.Unload(true);
                 return null;
             }
             
@@ -93,6 +94,7 @@ namespace Rawrshak
             if (!VerifyAudioClipProperties(audioClip, data))
             {
                 Debug.LogError("AudioClip does not have the correct audio properties");
+                assetBundle.Unload(true);
                 return null;
             }
 
