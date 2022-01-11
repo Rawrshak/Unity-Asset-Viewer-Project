@@ -19,10 +19,11 @@ namespace Rawrshak
 
         protected static async Task<string> PostAsync(string uri, string queryWithArgs) {
             // Post query
-            UnityWebRequest request = await HttpHandler.PostAsync(uri, queryWithArgs, null);
-            Debug.Log(HttpHandler.FormatJson(request.downloadHandler.text));
-
-            return request.downloadHandler.text;
+            using (UnityWebRequest request = await HttpHandler.PostAsync(uri, queryWithArgs, null))
+            {
+                Debug.Log(HttpHandler.FormatJson(request.downloadHandler.text));
+                return request.downloadHandler.text;
+            }
         }
     }
 }
