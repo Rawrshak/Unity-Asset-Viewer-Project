@@ -73,32 +73,67 @@ namespace Rawrshak
                 return null;
             }
 
-            AssetBundle assetBundle = await Downloader.DownloadAssetBundle(data.uri);
-            if (assetBundle == null)
+            AudioClip audioClip;
+            if (data.compression == "raw")
             {
-                Debug.LogError("AssetBundle not found");
-                return null;
+                switch(type)
+                {
+                    case ContentTypes.Wav:
+                    {
+                        audioClip = await Downloader.DownloadAudioClip(data.uri, AudioType.WAV);
+                        break;
+                    }
+                    case ContentTypes.MP3:
+                    {
+                        audioClip = await Downloader.DownloadAudioClip(data.uri, AudioType.MPEG);
+                        break;
+                    }
+                    case ContentTypes.Ogg:
+                    {
+                        audioClip = await Downloader.DownloadAudioClip(data.uri, AudioType.OGGVORBIS);
+                        break;
+                    }
+                    case ContentTypes.Aiff:
+                    {
+                        audioClip = await Downloader.DownloadAudioClip(data.uri, AudioType.AIFF);
+                        break;
+                    }
+                    default:
+                    {
+                        Debug.LogError("Audio Clip Type is not supported.");
+                        return null;
+                    }
+                }
+            }
+            else
+            {
+                AssetBundle assetBundle = await Downloader.DownloadAssetBundle(data.uri);
+                if (assetBundle == null)
+                {
+                    Debug.LogError("AssetBundle not found");
+                    return null;
+                }
+
+                // Debug.Log("****** Filename: " + data.name);
+                audioClip = assetBundle.LoadAsset<AudioClip>(data.name);
+
+                if (audioClip == null)
+                {
+                    Debug.LogError("AudioClip doesn't exist in AssetBundle");
+                    assetBundle.Unload(true);
+                    return null;
+                }
+                
+                // Compare AudioClip data to audio properties metadata
+                if (!VerifyAudioClipProperties(audioClip, data))
+                {
+                    Debug.LogError("AudioClip does not have the correct audio properties");
+                    assetBundle.Unload(true);
+                    return null;
+                }
+                assetBundle.Unload(false);
             }
 
-            // Debug.Log("****** Filename: " + data.name);
-            AudioClip audioClip = assetBundle.LoadAsset<AudioClip>(data.name);
-
-            if (audioClip == null)
-            {
-                Debug.LogError("AudioClip doesn't exist in AssetBundle");
-                assetBundle.Unload(true);
-                return null;
-            }
-            
-            // Compare AudioClip data to audio properties metadata
-            if (!VerifyAudioClipProperties(audioClip, data))
-            {
-                Debug.LogError("AudioClip does not have the correct audio properties");
-                assetBundle.Unload(true);
-                return null;
-            }
-
-            assetBundle.Unload(false);
             currentAudioClip = audioClip;
             currentContentType = type;
             return currentAudioClip;
