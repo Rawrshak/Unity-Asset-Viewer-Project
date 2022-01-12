@@ -7,7 +7,7 @@ namespace Rawrshak
     public class Constants
     {
         public static string RAWRSHAK_ICONTENT_INTERFACE_ID = "0x6a3af2b5";
-        public static string IPFS_QUERY_FORMAT = "https://ipfs.io/ipfs/{0}";
+        public static string IPFS_QUERY_FORMAT = "https://gateway.pinata.cloud/ipfs/{0}";
         
         public static string GET_ASSET_INFO_QUERY_STRING_LOCATION = "ContentInfo/GetAssetInfo";
         public static string GET_ASSET_IDS_WITH_TAG_QUERY_STRING_LOCATION = "ContentInfo/GetAssetIdsWithTag";

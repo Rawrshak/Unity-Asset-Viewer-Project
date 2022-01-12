@@ -20,6 +20,7 @@ namespace GraphQlClient.Core
             byte[] postData = Encoding.ASCII.GetBytes(jsonData);
             UnityWebRequest request = UnityWebRequest.Post(url, UnityWebRequest.kHttpVerbPOST);
             request.uploadHandler = new UploadHandlerRaw(postData);
+            request.timeout = 10;
             request.SetRequestHeader("Content-Type", "application/json");
             if (!String.IsNullOrEmpty(authToken)) 
                 request.SetRequestHeader("Authorization", "Bearer " + authToken);
@@ -46,6 +47,7 @@ namespace GraphQlClient.Core
 			string jsonData = JsonConvert.SerializeObject(new{query = details});
 			byte[] postData = Encoding.ASCII.GetBytes(jsonData);
 			request.uploadHandler = new UploadHandlerRaw(postData);
+            request.timeout = 10;
 			OnRequestBegin  requestBegin = new OnRequestBegin();
 			requestBegin.FireEvent();
             

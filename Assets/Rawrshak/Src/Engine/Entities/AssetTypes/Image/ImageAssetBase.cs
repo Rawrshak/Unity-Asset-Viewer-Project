@@ -8,6 +8,7 @@ namespace Rawrshak
 {
     public abstract class ImageAssetBase : AssetBase
     {
+        // Todo: Image ContentType check
         protected ImageMetadataBase metadata;
         private Texture2D currentTextureAsset;
 

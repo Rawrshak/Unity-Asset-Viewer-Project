@@ -21,6 +21,12 @@ namespace Rawrshak
             // Post query
             using (UnityWebRequest request = await HttpHandler.PostAsync(uri, queryWithArgs, null))
             {
+                if (request.result != UnityWebRequest.Result.Success)
+                {
+                    Debug.LogError(request.error);
+                    return String.Empty;
+                }
+
                 Debug.Log(HttpHandler.FormatJson(request.downloadHandler.text));
                 return request.downloadHandler.text;
             }

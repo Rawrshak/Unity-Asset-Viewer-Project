@@ -63,9 +63,7 @@ namespace Rawrshak
             }
 
             // Download Metadata
-            await LoadMetadata(latestPublicUri);
-
-            return true;
+            return await LoadMetadata(latestPublicUri);
         }
 
         public async Task<bool> LoadImage()
@@ -201,22 +199,23 @@ namespace Rawrshak
             }
         }
         
-        private async Task LoadMetadata(string uri)
+        private async Task<bool> LoadMetadata(string uri)
         {
             if (String.IsNullOrEmpty(uri))
             {
                 Debug.LogError("Invalid Rawrshak Asset Load. Metadata URI doesn't exist");
-                return;
+                return false;
             }
 
             string metadataJson = await Downloader.DownloadMetadata(uri);
 
             if (String.IsNullOrEmpty(metadataJson)) {
                 Debug.LogError("Invalid Rawrshak Asset Load. Metadata doesn't exist");
-                return;
+                return false;
             }
 
             baseMetadata = PublicAssetMetadataBase.Parse(metadataJson);
+            return true;
         }
 
         public static AssetType ParseAssetType(string type)

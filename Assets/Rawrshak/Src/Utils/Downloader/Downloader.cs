@@ -11,17 +11,18 @@ namespace Rawrshak
     {
         public static string lastError;
 
-        public static async Task<string> DownloadMetadata(string uri)
+        public static async Task<string> DownloadMetadata(string uri, int timeout = 10)
         {
             using (UnityWebRequest uwr = UnityWebRequest.Get(uri))
             {
+                uwr.timeout = timeout;
                 // Request and wait for the text json file to be downloaded
                 await uwr.SendWebRequest();
 
                 if (uwr.result != UnityWebRequest.Result.Success)
                 {
                     lastError = uwr.error;
-                    Debug.LogError(uwr.error);
+                    Debug.LogError("Uri: " + uri + ", Error Message: uwr.error");
                     return String.Empty;
                 }
 
@@ -30,10 +31,11 @@ namespace Rawrshak
             }
         }
         
-        public static async Task<Texture2D> DownloadTexture(string uri)
+        public static async Task<Texture2D> DownloadTexture(string uri, int timeout = 10)
         {
             using (UnityWebRequest uwr = UnityWebRequest.Get(uri))
             {
+                uwr.timeout = timeout;
                 uwr.downloadHandler = new DownloadHandlerTexture();
 
                 // Request and wait for the text json file to be downloaded
@@ -42,7 +44,7 @@ namespace Rawrshak
                 if (uwr.result != UnityWebRequest.Result.Success)
                 {
                     lastError = uwr.error;
-                    Debug.LogError(uwr.error);
+                    Debug.LogError("Uri: " + uri + ", Error Message: uwr.error");
                     return null;
                 }
 
@@ -50,10 +52,11 @@ namespace Rawrshak
             }
         }
 
-        public static async Task<AssetBundle> DownloadAssetBundle(string uri)
+        public static async Task<AssetBundle> DownloadAssetBundle(string uri, int timeout = 10)
         {
             using (UnityWebRequest uwr = UnityWebRequest.Get(uri))
             {
+                uwr.timeout = timeout;
                 uwr.downloadHandler = new DownloadHandlerAssetBundle(uwr.url, 0);
 
                 // Request and wait for the text json file to be downloaded
@@ -62,7 +65,7 @@ namespace Rawrshak
                 if (uwr.result != UnityWebRequest.Result.Success)
                 {
                     lastError = uwr.error;
-                    Debug.LogError(uwr.error);
+                    Debug.LogError("Uri: " + uri + ", Error Message: uwr.error");
                     return null;
                 }
 
