@@ -61,10 +61,15 @@ public class Static3dAssetManager : MonoBehaviour
 
     public async Task LoadStaticObjectAssets(List<KeyValuePair<Asset, int>> staticObjectAssets)
     {
-        m_assets = staticObjectAssets;
+        ClearAssets();
+
         foreach (var pair in staticObjectAssets)
         {
-            await pair.Key.Load();
+            if (!(await pair.Key.Load()))
+            {
+                Debug.LogError($"Unable to load Asset: {pair.Key.assetName}");
+                continue;
+            }
             Debug.Log($"Asset: {pair.Key.assetName}, amount: {pair.Value}");
             
             // Load text asset component
@@ -72,6 +77,7 @@ public class Static3dAssetManager : MonoBehaviour
             
             Dropdown.OptionData data = new Dropdown.OptionData();
             data.text = pair.Key.assetName;
+            m_assets.Add(pair);
             m_staticObjectSelectorDropdown.options.Add(data);
         }
         

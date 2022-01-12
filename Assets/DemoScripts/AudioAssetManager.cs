@@ -76,11 +76,15 @@ public class AudioAssetManager : MonoBehaviour
 
     public async Task LoadAudioAssets(List<KeyValuePair<Asset, int>> audioAssets)
     {
-        m_assets = audioAssets;
+        ClearAssets();
         foreach (var pair in audioAssets)
         {
             // Load metadata
-            await pair.Key.Load();
+            if (!(await pair.Key.Load()))
+            {
+                Debug.LogError($"Unable to load Asset: {pair.Key.assetName}");
+                continue;
+            }
             Debug.Log($"Asset: {pair.Key.assetName}, amount: {pair.Value}");
 
             // Load text asset component
@@ -88,6 +92,7 @@ public class AudioAssetManager : MonoBehaviour
             
             Dropdown.OptionData data = new Dropdown.OptionData();
             data.text = pair.Key.assetName;
+            m_assets.Add(pair);
             m_audioSelectorDropdown.options.Add(data);
         }
         

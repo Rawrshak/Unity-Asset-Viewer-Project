@@ -62,55 +62,33 @@ public class WalletManager : MonoBehaviour
         // Load Rawrshak Wallet Info
         await m_rawrshakWallet.LoadAccountInfo(WalletConnect.ActiveSession.Accounts[0]);
 
-        // Load Text objects
-        List<KeyValuePair<Asset, int>> textAssets = await m_rawrshakWallet.GetAssetsOfType("text", 100, String.Empty);
-        Debug.Log("Loading Text Assets: " + textAssets.Count);
-        await m_textAssetManager.LoadTextAssets(textAssets);
-
-        // Load Image objects
-        List<KeyValuePair<Asset, int>> imageAssets = await m_rawrshakWallet.GetAssetsOfType("image", 100, String.Empty);
-        Debug.Log("Loading Image Assets: " + imageAssets.Count);
-        await m_imageAssetManager.LoadImageAssets(imageAssets);
-
-        // Audio Image objects
-        List<KeyValuePair<Asset, int>> audioAssets = await m_rawrshakWallet.GetAssetsOfType("audio", 100, String.Empty);
-        Debug.Log("Loading Audio Assets: " + audioAssets.Count);
-        await m_audioAssetManager.LoadAudioAssets(audioAssets);
-
-        // Static 3d Object Image objects
-        List<KeyValuePair<Asset, int>> staticObjectAssets = await m_rawrshakWallet.GetAssetsOfType("static3dobject", 100, String.Empty);
-        Debug.Log("Loading Static Objects Assets: " + staticObjectAssets.Count);
-        await m_static3dAssetManager.LoadStaticObjectAssets(staticObjectAssets);
+        await RefreshWallet();
     }
 
     public async Task RefreshWallet()
     {
         if (m_walletConnect.Connected)
         {
-            Debug.Log("Reloading Wallet Assets.");
+            Debug.Log("Loading Wallet Assets.");
 
             // Load Text objects
             List<KeyValuePair<Asset, int>> textAssets = await m_rawrshakWallet.GetAssetsOfType("text", 100, String.Empty);
             Debug.Log("Loading Text Assets: " + textAssets.Count);
-            m_textAssetManager.ClearAssets();
             await m_textAssetManager.LoadTextAssets(textAssets);
 
             // Load Image objects
             List<KeyValuePair<Asset, int>> imageAssets = await m_rawrshakWallet.GetAssetsOfType("image", 100, String.Empty);
             Debug.Log("Loading Image Assets: " + imageAssets.Count);
-            m_imageAssetManager.ClearAssets();
             await m_imageAssetManager.LoadImageAssets(imageAssets);
 
             // Audio Image objects
             List<KeyValuePair<Asset, int>> audioAssets = await m_rawrshakWallet.GetAssetsOfType("audio", 100, String.Empty);
             Debug.Log("Loading Audio Assets: " + audioAssets.Count);
-            m_audioAssetManager.ClearAssets();
             await m_audioAssetManager.LoadAudioAssets(audioAssets);
 
             // Static 3d Object Image objects
             List<KeyValuePair<Asset, int>> staticObjectAssets = await m_rawrshakWallet.GetAssetsOfType("static3dobject", 100, String.Empty);
             Debug.Log("Loading Static Objects Assets: " + staticObjectAssets.Count);
-            m_static3dAssetManager.ClearAssets();
             await m_static3dAssetManager.LoadStaticObjectAssets(staticObjectAssets);
         }
         else

@@ -68,10 +68,14 @@ public class ImageAssetManager : MonoBehaviour
 
     public async Task LoadImageAssets(List<KeyValuePair<Asset, int>> imageAssets)
     {
-        m_assets = imageAssets;
+        ClearAssets();
         foreach (var pair in imageAssets)
         {
-            await pair.Key.Load();
+            if (!(await pair.Key.Load()))
+            {
+                Debug.LogError($"Unable to load Asset: {pair.Key.assetName}");
+                continue;
+            }
             Debug.Log($"Asset: {pair.Key.assetName}, amount: {pair.Value}");
             
             // Load text asset component
@@ -79,6 +83,7 @@ public class ImageAssetManager : MonoBehaviour
             
             Dropdown.OptionData data = new Dropdown.OptionData();
             data.text = pair.Key.assetName;
+            m_assets.Add(pair);
             m_imageSelectorDropdown.options.Add(data);
         }
         

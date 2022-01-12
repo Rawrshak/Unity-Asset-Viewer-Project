@@ -48,10 +48,15 @@ public class TextAssetManager : MonoBehaviour
 
     public async Task LoadTextAssets(List<KeyValuePair<Asset, int>> textAssets)
     {
-        m_assets = textAssets;
-        foreach (var pair in m_assets)
+        ClearAssets();
+
+        foreach (var pair in textAssets)
         {
-            await pair.Key.Load();
+            if (!(await pair.Key.Load()))
+            {
+                Debug.LogError($"Unable to load Asset: {pair.Key.assetName}");
+                continue;
+            }
             Debug.Log($"Asset: {pair.Key.assetName}, amount: {pair.Value}");
             
             // Load text asset component
@@ -59,6 +64,7 @@ public class TextAssetManager : MonoBehaviour
             
             Dropdown.OptionData data = new Dropdown.OptionData();
             data.text = pair.Key.assetName;
+            m_assets.Add(pair);
             m_textSelectorDropdown.options.Add(data);
         }
 
