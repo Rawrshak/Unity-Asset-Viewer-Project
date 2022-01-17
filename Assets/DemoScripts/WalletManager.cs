@@ -9,7 +9,7 @@ using WalletConnectSharp.Core;
 using WalletConnectSharp.Core.Models;
 using Rawrshak;
 
-public class WalletManager : MonoBehaviour
+public class WalletManager : WalletConnectActions
 {
     public GameObject m_loadWalletUI;
     public GameObject m_loggedInUI;
@@ -43,12 +43,13 @@ public class WalletManager : MonoBehaviour
         // Get the instance of the TextAssetManager
 
         m_refreshButton.onClick.AddListener(async () => await RefreshWallet());
-        m_loadNewWalletButton.onClick.AddListener(async () => await ClearWallet());
+        m_loadNewWalletButton.onClick.AddListener(async () => await LoadNewWallet());
     }
 
-    void OnDisable()
+    async Task OnDisable()
     {
-        m_walletConnect.CLearSession();
+        m_walletConnect.createNewSessionOnSessionDisconnect = false;
+        await WalletConnect.ActiveSession.Disconnect();
     }
 
     private async Task WalletConnectedEventHandler()
@@ -97,14 +98,10 @@ public class WalletManager : MonoBehaviour
         }
     }
 
-    public async Task ClearWallet()
+    public async Task LoadNewWallet()
     {
-        // Todo: Add Clear Wallet and Reload
         if (m_walletConnect.Connected)
         {
-            // Clearing WalletConnect
-            m_walletConnect.CLearSession();
-
             Debug.Log("Clearing Wallet Assets.");
             m_loadWalletUI.SetActive(true);
             m_loggedInUI.SetActive(false);
@@ -118,7 +115,7 @@ public class WalletManager : MonoBehaviour
             m_audioAssetManager.ClearAssets();
             m_static3dAssetManager.ClearAssets();
             
-            await m_walletConnect.Connect();
+            CloseSession(true);
         }
     }
 }
