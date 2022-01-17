@@ -175,6 +175,40 @@ namespace Rawrshak
             }
             return types;
         }
+
+        public bool IsContentTypeSupported(ContentTypes type)
+        {
+            foreach(var data in audioData)
+            {
+                if (type == data.Key)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool IsCompressionTypeSupported(CompressionType type)
+        {
+            foreach(var data in audioData)
+            {
+                if (type == ConvertCompressionFromString(data.Value.compression))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public List<CompressionType> GetAvailableCompressionTypes()
+        {
+            List<CompressionType> types = new List<CompressionType>();
+            foreach(var data in audioData)
+            {
+                types.Add(ConvertCompressionFromString(data.Value.compression));
+            }
+            return types;
+        }
         
         public int GetDuration(ContentTypes type)
         {
