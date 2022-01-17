@@ -119,7 +119,7 @@ public class AudioAssetManager : MonoBehaviour
             }
 
             // Just use the default for now
-            m_source.clip = await audioAsset.LoadAndSetAudioClipFromContentType(contentTypes[0]);
+            m_source.clip = await audioAsset.LoadAndSetAudioClipFromContentType(contentTypes[0], AudioAssetBase.CompressionType.Raw);
 
             if (m_source.clip == null) {
                 Debug.LogError("Error: Couldn't load \"" + asset.assetName + "\" audio clip.");

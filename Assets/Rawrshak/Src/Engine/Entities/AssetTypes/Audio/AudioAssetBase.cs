@@ -23,7 +23,12 @@ namespace Rawrshak
             Aiff
         }
 
-        // todo: add Compression
+        public enum CompressionType {
+            Raw,
+            PCM,
+            ADPCM,
+            Compressed
+        }
 
         private static string Engine = "unity";
 
@@ -41,7 +46,7 @@ namespace Rawrshak
             foreach (var audioProperty in metadata.assetProperties)
             {
                 // Filter out non-unity engine assets and unsupported content types
-                ContentTypes contentType = ConvertFromString(audioProperty.contentType);
+                ContentTypes contentType = ConvertContentTypeFromString(audioProperty.contentType);
                 if (audioProperty.engine == Engine && contentType != ContentTypes.Invalid)
                 {
                     // Note: Overwrite duplicates. Does not throw an exception
@@ -52,7 +57,7 @@ namespace Rawrshak
             currentContentType = ContentTypes.Invalid;
         }
         
-        public async Task<AudioClip> LoadAndSetAudioClipFromContentType(ContentTypes type)
+        public async Task<AudioClip> LoadAndSetAudioClipFromContentType(ContentTypes type, CompressionType compressionType)
         {
             if (!audioData.ContainsKey(type) || type == ContentTypes.Invalid)
             {
@@ -65,16 +70,23 @@ namespace Rawrshak
                 return currentAudioClip;
             }
 
-            AudioProperties data = audioData[type];
+            AudioProperties data = null;
+            foreach (var aData in audioData.Values)
+            {
+                if (ConvertContentTypeFromString(aData.contentType) == type && ConvertCompressionFromString(aData.compression) == compressionType) {
+                    data = aData;
+                    break;
+                }
+            }
             
-            if (String.IsNullOrEmpty(data.uri))
+            if (data == null)
             {
                 Debug.LogError("AudioClip metadata uri is not found");
                 return null;
             }
 
             AudioClip audioClip;
-            if (data.compression == "raw")
+            if (ConvertCompressionFromString(data.compression) == CompressionType.Raw)
             {
                 switch(type)
                 {
@@ -194,7 +206,7 @@ namespace Rawrshak
             return true;
         }
         
-        private ContentTypes ConvertFromString(string contentType)
+        private ContentTypes ConvertContentTypeFromString(string contentType)
         {
             switch(contentType)
             {
@@ -217,6 +229,29 @@ namespace Rawrshak
                 default:
                 {
                     return ContentTypes.Invalid;
+                }
+            }
+        }
+        
+        private CompressionType ConvertCompressionFromString(string compressionType)
+        {
+            switch(compressionType)
+            {
+                case "pcm":
+                {
+                    return CompressionType.PCM;
+                }
+                case "adpcm":
+                {
+                    return CompressionType.ADPCM;
+                }
+                case "compressed":
+                {
+                    return CompressionType.Compressed;
+                }
+                default:
+                {
+                    return CompressionType.Raw;
                 }
             }
         }
