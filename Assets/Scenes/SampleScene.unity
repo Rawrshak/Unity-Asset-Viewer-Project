@@ -639,7 +639,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &260774057
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4599,12 +4599,26 @@ MonoBehaviour:
   autoSaveAndResume: 1
   connectOnAwake: 0
   connectOnStart: 1
+  createNewSessionOnSessionDisconnect: 1
+  connectSessionRetryCount: 3
   customBridgeUrl: 
   chainId: 69
   ConnectedEvent:
     m_PersistentCalls:
       m_Calls: []
   ConnectedEventSession:
+    m_PersistentCalls:
+      m_Calls: []
+  DisconnectedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  ConnectionFailedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  NewSessionConnected:
+    m_PersistentCalls:
+      m_Calls: []
+  ResumedSessionConnected:
     m_PersistentCalls:
       m_Calls: []
   AppData:
