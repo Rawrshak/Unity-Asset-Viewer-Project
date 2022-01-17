@@ -91,7 +91,7 @@ public class AudioAssetManager : MonoBehaviour
             pair.Key.CreateAssetComponent();
             
             Dropdown.OptionData data = new Dropdown.OptionData();
-            data.text = pair.Key.assetName;
+            data.text = IsAudioSupported(pair.Key) ? pair.Key.assetName : "[StandaloneWindows Unsupported] " + pair.Key.assetName;
             m_assets.Add(pair);
             m_audioSelectorDropdown.options.Add(data);
         }
@@ -105,25 +105,41 @@ public class AudioAssetManager : MonoBehaviour
     {
         if (m_audioSelectorDropdown.value < m_assets.Count)
         {
+            // Clearing source clip
+            m_source.clip = null;
+
             Asset asset = m_assets[m_audioSelectorDropdown.value].Key;
             Debug.Log("Audio Name: " + asset.assetName);
 
             // Load the Audio Clip
             AudioAssetBase audioAsset = asset.assetComponent as AudioAssetBase;
 
-            List<AudioAssetBase.ContentTypes> contentTypes = audioAsset.GetAvailableContentTypes();
-            if (contentTypes.Count == 0)
+            if (!IsAudioSupported(asset))
             {
                 Debug.LogError("No supported audio files available for the audio clip");
                 return;
             }
 
             // Just use the default for now
-            m_source.clip = await audioAsset.LoadAndSetAudioClipFromContentType(contentTypes[0]);
+            List<AudioAssetBase.ContentTypes> contentTypes = audioAsset.GetAvailableContentTypes();
+            m_source.clip = await audioAsset.LoadAndSetAudioClipFromContentType(contentTypes[0], AudioAssetBase.CompressionType.Compressed);
 
             if (m_source.clip == null) {
                 Debug.LogError("Error: Couldn't load \"" + asset.assetName + "\" audio clip.");
             }
         }
+    }
+
+    bool IsAudioSupported(Asset asset)
+    {
+        AudioAssetBase audioAsset = asset.assetComponent as AudioAssetBase;
+
+        List<AudioAssetBase.ContentTypes> contentTypes = audioAsset.GetAvailableContentTypes();
+        if (contentTypes.Count == 0 ||
+            !audioAsset.IsCompressionTypeSupported(AudioAssetBase.CompressionType.Compressed))
+        {
+            return false;
+        }
+        return true;
     }
 }
