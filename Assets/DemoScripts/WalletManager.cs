@@ -43,7 +43,7 @@ public class WalletManager : WalletConnectActions
         // Get the instance of the TextAssetManager
 
         m_refreshButton.onClick.AddListener(async () => await RefreshWallet());
-        m_loadNewWalletButton.onClick.AddListener(async () => await LoadNewWallet());
+        m_loadNewWalletButton.onClick.AddListener(() => LoadNewWallet());
     }
 
     async Task OnDisable()
@@ -98,7 +98,7 @@ public class WalletManager : WalletConnectActions
         }
     }
 
-    public async Task LoadNewWallet()
+    public void LoadNewWallet()
     {
         if (m_walletConnect.Connected)
         {
