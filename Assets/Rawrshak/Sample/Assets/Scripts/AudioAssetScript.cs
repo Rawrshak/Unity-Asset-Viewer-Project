@@ -79,6 +79,6 @@ public class AudioAssetScript : MonoBehaviour
             return;
         }
 
-        m_source.clip = await assetComponent.LoadAndSetAudioClipFromContentType(contentTypes[0]);
+        m_source.clip = await assetComponent.LoadAndSetAudioClipFromContentType(contentTypes[0], AudioAssetBase.CompressionType.Raw);
     }
 }

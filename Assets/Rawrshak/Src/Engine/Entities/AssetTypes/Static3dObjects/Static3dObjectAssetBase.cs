@@ -199,6 +199,42 @@ namespace Rawrshak
             }
             return fidelities.ToList();
         }
+
+        public bool IsPlatformSupported(Platform platform)
+        {
+            foreach (var data in prefabData)
+            {
+                if (platform == ParsePlatform(data.platform)) 
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool IsFidelitySupported(Fidelity fidelity)
+        {
+            foreach (var data in prefabData)
+            {
+                if (fidelity == ParseFidelity(data.fidelity)) 
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool IsRenderPipelineSupported(RenderPipeline rp)
+        {
+            foreach (var data in prefabData)
+            {
+                if (rp == ParseRenderPipeline(data.renderPipeline)) 
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
         
         /***** Helper Functions *****/
         private Fidelity ParseFidelity(string fidelity)
