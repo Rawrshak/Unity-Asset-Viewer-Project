@@ -112,6 +112,7 @@ public class Static3dAssetManager : MonoBehaviour
             
             GameObject prefabInstance = Instantiate(prefab, m_placeholder.transform.position, m_placeholder.transform.rotation);
             m_defaultObject.SetActive(false);
+            Destroy(m_childObject);
             m_childObject = prefabInstance;
             m_childObject.transform.parent = m_placeholder.transform;
         }
