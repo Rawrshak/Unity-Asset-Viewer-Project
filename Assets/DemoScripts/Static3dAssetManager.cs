@@ -94,11 +94,12 @@ public class Static3dAssetManager : MonoBehaviour
             Debug.Log("Static Object Name: " + asset.assetName);
 
             if (!IsStatic3DAssetSupported(asset)) {
-                Debug.LogError("No supported prefab available for this game");
+                Debug.LogError("Error: No supported prefab available for this game");
                 return;
             }
 
             Static3dObjectAssetBase static3dObjectAsset = asset.assetComponent as Static3dObjectAssetBase;
+            static3dObjectAsset.downloadTimeout = 30;
             GameObject prefab = await static3dObjectAsset.LoadAndSetPrefab(
                 Static3dObjectAssetBase.Platform.StandaloneWindows, 
                 Static3dObjectAssetBase.RenderPipeline.BuiltInRenderPipeline,
