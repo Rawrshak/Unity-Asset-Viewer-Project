@@ -22,7 +22,7 @@ namespace Rawrshak
                 if (uwr.result != UnityWebRequest.Result.Success)
                 {
                     lastError = uwr.error;
-                    Debug.LogError("Uri: " + uri + ", Error Message: uwr.error");
+                    Debug.LogError("[Downloader] Uri: " + uri + ", Error Message: " + lastError);
                     return String.Empty;
                 }
 
@@ -44,7 +44,7 @@ namespace Rawrshak
                 if (uwr.result != UnityWebRequest.Result.Success)
                 {
                     lastError = uwr.error;
-                    Debug.LogError("Uri: " + uri + ", Error Message: uwr.error");
+                    Debug.LogError("[Downloader] Uri: " + uri + ", Error Message: " + lastError);
                     return null;
                 }
 
@@ -65,7 +65,7 @@ namespace Rawrshak
                 if (uwr.result != UnityWebRequest.Result.Success)
                 {
                     lastError = uwr.error;
-                    Debug.LogError("Uri: " + uri + ", Error Message: uwr.error");
+                    Debug.LogError("[Downloader] Uri: " + uri + ", Error Message: " + lastError);
                     return null;
                 }
 
@@ -86,7 +86,7 @@ namespace Rawrshak
                 if (uwr.result != UnityWebRequest.Result.Success)
                 {
                     lastError = uwr.error;
-                    Debug.LogError("Uri: " + uri + ", Error Message: uwr.error");
+                    Debug.LogError("[Downloader] Uri: " + uri + ", Error Message: " + lastError);
                     return null;
                 }
 

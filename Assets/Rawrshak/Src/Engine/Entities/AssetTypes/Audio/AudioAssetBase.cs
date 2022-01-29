@@ -32,6 +32,8 @@ namespace Rawrshak
 
         private static string Engine = "unity";
 
+        public int downloadTimeout = 10;
+
         protected AudioMetadataBase metadata;
         protected Dictionary<ContentTypes, AudioProperties> audioData;
         protected ContentTypes currentContentType;
@@ -61,7 +63,7 @@ namespace Rawrshak
         {
             if (!audioData.ContainsKey(type) || type == ContentTypes.Invalid)
             {
-                Debug.LogError("No audio ContentType supported");
+                Debug.LogError("[AudioAssetBase] No audio ContentType supported");
                 return null;
             }
 
@@ -81,7 +83,7 @@ namespace Rawrshak
             
             if (data == null)
             {
-                Debug.LogError("AudioClip metadata uri is not found");
+                Debug.LogError("[AudioAssetBase] AudioClip metadata uri is not found");
                 return null;
             }
 
@@ -92,22 +94,22 @@ namespace Rawrshak
                 {
                     case ContentTypes.Wav:
                     {
-                        audioClip = await Downloader.DownloadAudioClip(data.uri, AudioType.WAV);
+                        audioClip = await Downloader.DownloadAudioClip(data.uri, AudioType.WAV, downloadTimeout);
                         break;
                     }
                     case ContentTypes.MP3:
                     {
-                        audioClip = await Downloader.DownloadAudioClip(data.uri, AudioType.MPEG);
+                        audioClip = await Downloader.DownloadAudioClip(data.uri, AudioType.MPEG, downloadTimeout);
                         break;
                     }
                     case ContentTypes.Ogg:
                     {
-                        audioClip = await Downloader.DownloadAudioClip(data.uri, AudioType.OGGVORBIS);
+                        audioClip = await Downloader.DownloadAudioClip(data.uri, AudioType.OGGVORBIS, downloadTimeout);
                         break;
                     }
                     case ContentTypes.Aiff:
                     {
-                        audioClip = await Downloader.DownloadAudioClip(data.uri, AudioType.AIFF);
+                        audioClip = await Downloader.DownloadAudioClip(data.uri, AudioType.AIFF, downloadTimeout);
                         break;
                     }
                     default:
@@ -119,10 +121,10 @@ namespace Rawrshak
             }
             else
             {
-                AssetBundle assetBundle = await Downloader.DownloadAssetBundle(data.uri);
+                AssetBundle assetBundle = await Downloader.DownloadAssetBundle(data.uri, downloadTimeout);
                 if (assetBundle == null)
                 {
-                    Debug.LogError("AssetBundle not found");
+                    Debug.LogError("[AudioAssetBase] Unable to download AssetBundle.");
                     return null;
                 }
 
@@ -131,7 +133,7 @@ namespace Rawrshak
 
                 if (audioClip == null)
                 {
-                    Debug.LogError("AudioClip doesn't exist in AssetBundle");
+                    Debug.LogError("[AudioAssetBase] AudioClip doesn't exist in AssetBundle");
                     assetBundle.Unload(true);
                     return null;
                 }
@@ -139,7 +141,7 @@ namespace Rawrshak
                 // Compare AudioClip data to audio properties metadata
                 if (!VerifyAudioClipProperties(audioClip, data))
                 {
-                    Debug.LogError("AudioClip does not have the correct audio properties");
+                    Debug.LogError("[AudioAssetBase] AudioClip does not have the correct audio properties");
                     assetBundle.Unload(true);
                     return null;
                 }

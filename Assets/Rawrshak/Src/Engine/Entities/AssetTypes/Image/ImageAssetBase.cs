@@ -22,7 +22,7 @@ namespace Rawrshak
         {
             if (metadata.assetProperties.Length == 0)
             {
-                Debug.LogError("No image asset uri available");
+                Debug.LogError("[ImageAssetBase] No image asset uri available");
                 return null;
             }
 
@@ -48,7 +48,7 @@ namespace Rawrshak
             // resolution doesn't exists
             if (String.IsNullOrEmpty(uri))
             {
-                Debug.LogError("Resolution is not found");
+                Debug.LogError("[ImageAssetBase] Resolution is not found");
                 return null;
             }
             
@@ -58,7 +58,7 @@ namespace Rawrshak
             // verify that the downloaded texture has the correct resolution
             if (downloadedTexture.width != width || downloadedTexture.height != height)
             {
-                Debug.LogError("Incorrect Metadata for downloaded texture2d object");
+                Debug.LogError("[ImageAssetBase] Incorrect Metadata for downloaded texture2d object");
                 return null;
             }
 

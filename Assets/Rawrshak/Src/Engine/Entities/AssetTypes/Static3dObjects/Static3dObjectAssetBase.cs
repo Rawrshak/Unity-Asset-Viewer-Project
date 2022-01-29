@@ -44,6 +44,8 @@ namespace Rawrshak
 
         private static string Engine = "unity";
 
+        public int downloadTimeout = 10;
+
         protected Static3dObjectMetadataBase metadata;
         protected List<PrefabProperties> prefabData;
         protected Fidelity currentFidelity;
@@ -57,7 +59,7 @@ namespace Rawrshak
             // Note: We make the assumption that the Rendering Pipline is set to Built-in Render Pipeline
             if (GraphicsSettings.renderPipelineAsset)
             {
-                Debug.LogError("Only the built-in render pipeline is supported.");
+                Debug.LogError("[Static3dObjectAssetBase] Only the built-in render pipeline is supported.");
                 return;
             }
 
@@ -106,28 +108,28 @@ namespace Rawrshak
 
             if (prefabProperty == null)
             {
-                Debug.LogError("No prefab found.");
+                Debug.LogError("[Static3dObjectAssetBase] No prefab found.");
                 return null;
             }
 
             if (String.IsNullOrEmpty(prefabProperty.uri))
             {
-                Debug.LogError("Prefab metadata uri is not found");
+                Debug.LogError("[Static3dObjectAssetBase] Prefab metadata uri is not found");
                 return null;
             }
             
             // Download the assetbundle
-            AssetBundle assetBundle = await Downloader.DownloadAssetBundle(prefabProperty.uri);
+            AssetBundle assetBundle = await Downloader.DownloadAssetBundle(prefabProperty.uri, downloadTimeout);
             if (assetBundle == null)
             {
-                Debug.LogError("AssetBundle not found");
+                Debug.LogError("[Static3dObjectAssetBase] Unable to download AssetBundle.");
                 return null;
             }
             
             GameObject prefabGameObj = assetBundle.LoadAsset<GameObject>(prefabProperty.name);
             if (prefabGameObj == null)
             {
-                Debug.LogError("Prefab doesn't exist in AssetBundle");
+                Debug.LogError("[Static3dObjectAssetBase] Prefab doesn't exist in AssetBundle");
                 assetBundle.Unload(true);
                 return null;
             }
