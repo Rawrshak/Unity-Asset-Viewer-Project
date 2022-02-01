@@ -26,7 +26,7 @@ namespace Rawrshak
                     Debug.LogError(request.error);
                     return String.Empty;
                 }
-
+                
                 Debug.Log(HttpHandler.FormatJson(request.downloadHandler.text));
                 return request.downloadHandler.text;
             }
