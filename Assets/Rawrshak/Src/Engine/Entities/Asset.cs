@@ -218,6 +218,7 @@ namespace Rawrshak
             return true;
         }
 
+
         public static AssetType ParseAssetType(string type)
         {
             switch (type)

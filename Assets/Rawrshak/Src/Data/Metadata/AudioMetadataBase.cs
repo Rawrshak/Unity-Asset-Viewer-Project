@@ -25,11 +25,7 @@ namespace Rawrshak
     {
         public string name;
         public string uri;
-        public string engine;
-        public string compression;
         public string contentType;
         public int duration;
-        public int channelCount;
-        public int sampleRate;
     }
 }

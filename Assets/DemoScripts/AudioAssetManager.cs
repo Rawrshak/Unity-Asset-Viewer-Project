@@ -121,8 +121,14 @@ public class AudioAssetManager : MonoBehaviour
             }
 
             // Just use the default for now
-            List<AudioAssetBase.ContentTypes> contentTypes = audioAsset.GetAvailableContentTypes();
-            m_source.clip = await audioAsset.LoadAndSetAudioClipFromContentType(contentTypes[0], AudioAssetBase.CompressionType.Raw);
+            if (audioAsset.IsAudioTypeSupported(AudioType.MPEG))
+            {
+                m_source.clip = await audioAsset.LoadAndSetAudioClipFromAudioType(AudioType.MPEG);
+            }
+            else if (audioAsset.IsAudioTypeSupported(AudioType.WAV))
+            {
+                m_source.clip = await audioAsset.LoadAndSetAudioClipFromAudioType(AudioType.WAV);
+            }
 
             if (m_source.clip == null) {
                 Debug.LogError("Error: Couldn't load \"" + asset.assetName + "\" audio clip.");
@@ -134,11 +140,11 @@ public class AudioAssetManager : MonoBehaviour
     {
         AudioAssetBase audioAsset = asset.assetComponent as AudioAssetBase;
 
-        List<AudioAssetBase.ContentTypes> contentTypes = audioAsset.GetAvailableContentTypes();
-        if (contentTypes.Count == 0 || !audioAsset.IsCompressionTypeSupported(AudioAssetBase.CompressionType.Raw))
+        List<AudioType> audioTypes = audioAsset.GetAvailableAudioTypes();
+        if (audioTypes.Count > 0)
         {
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 }

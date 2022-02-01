@@ -62,6 +62,8 @@ public class Static3dAssetScript : MonoBehaviour
                 return;
             }
 
+            assetComponent.downloadTimeout = 30;
+
             await LoadStatic3dAssets();
         }
     }

@@ -15,7 +15,9 @@ namespace Rawrshak
         {
             using (UnityWebRequest uwr = UnityWebRequest.Get(uri))
             {
+                // Set a timeout if the we can't find the file
                 uwr.timeout = timeout;
+
                 // Request and wait for the text json file to be downloaded
                 await uwr.SendWebRequest();
 
@@ -35,6 +37,7 @@ namespace Rawrshak
         {
             using (UnityWebRequest uwr = UnityWebRequest.Get(uri))
             {
+                // Set a timeout if the we can't find the file
                 uwr.timeout = timeout;
                 uwr.downloadHandler = new DownloadHandlerTexture();
 
@@ -77,6 +80,7 @@ namespace Rawrshak
         {
             using (UnityWebRequest uwr = UnityWebRequest.Get(uri))
             {
+                // Set a timeout if the we can't find the file
                 uwr.timeout = timeout;
                 uwr.downloadHandler = new DownloadHandlerAssetBundle(uwr.url, 0);
 
