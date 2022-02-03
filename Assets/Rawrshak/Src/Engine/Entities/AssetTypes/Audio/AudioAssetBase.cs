@@ -147,7 +147,7 @@ namespace Rawrshak
                 {
                     return AudioType.OGGVORBIS;
                 }
-                case "audio/x-aiff":
+                case "audio/aiff":
                 {
                     return AudioType.AIFF;
                 }
