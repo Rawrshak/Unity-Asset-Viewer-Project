@@ -129,14 +129,6 @@ public class AudioAssetManager : MonoBehaviour
             {
                 m_source.clip = await audioAsset.LoadAndSetAudioClipFromAudioType(AudioType.WAV);
             }
-            else if (audioAsset.IsAudioTypeSupported(AudioType.OGGVORBIS))
-            {
-                m_source.clip = await audioAsset.LoadAndSetAudioClipFromAudioType(AudioType.OGGVORBIS);
-            }
-            else if (audioAsset.IsAudioTypeSupported(AudioType.AIFF))
-            {
-                m_source.clip = await audioAsset.LoadAndSetAudioClipFromAudioType(AudioType.AIFF);
-            }
 
             if (m_source.clip == null) {
                 Debug.LogError("Error: Couldn't load \"" + asset.assetName + "\" audio clip.");
