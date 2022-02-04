@@ -143,14 +143,6 @@ namespace Rawrshak
                 {
                     return AudioType.MPEG;
                 }
-                case "audio/ogg":
-                {
-                    return AudioType.OGGVORBIS;
-                }
-                case "audio/aiff":
-                {
-                    return AudioType.AIFF;
-                }
                 default:
                 {
                     return AudioType.UNKNOWN;

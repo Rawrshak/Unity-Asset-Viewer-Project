@@ -82,14 +82,6 @@ public class AudioAssetScript : MonoBehaviour
         {
             m_source.clip = await assetComponent.LoadAndSetAudioClipFromAudioType(AudioType.WAV);
         }
-        else if (assetComponent.IsAudioTypeSupported(AudioType.OGGVORBIS))
-        {
-            m_source.clip = await assetComponent.LoadAndSetAudioClipFromAudioType(AudioType.OGGVORBIS);
-        }
-        else if (assetComponent.IsAudioTypeSupported(AudioType.AIFF))
-        {
-            m_source.clip = await assetComponent.LoadAndSetAudioClipFromAudioType(AudioType.AIFF);
-        }
         else
         {
             Debug.LogError("No supported audio files available for the audio clip");
